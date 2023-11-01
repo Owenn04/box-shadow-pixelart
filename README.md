@@ -1,27 +1,15 @@
-# React + TypeScript + Vite
+# Create pixel art using css box-shadow property.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This tool is in version 1.0, currently there is no hosted site. 
 
-Currently, two official plugins are available:
+To use, clone the repo and run locally with npm run dev
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Coming Soon
 
-## Expanding the ESLint configuration
+ - Support for more resolutions (32x32, 64x64, etc..)
+ - Front end ui
+ - Css output that can be tested in application. (currently need at least codepen to see result)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+ 
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
