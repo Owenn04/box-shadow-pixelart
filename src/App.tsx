@@ -7,6 +7,8 @@ function App() {
   const [image, setImage] = useState<string | null>(null);
   const [boxShadowString, setBoxShadowString] = useState<string>('');
 
+  const [pixelSize, setPixelSize] = useState(10)
+
   //Function to handle image upload 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -90,8 +92,8 @@ function App() {
     for (let row = 0; row < pixelArray.length; row++) {
       for (let col = 0; col < pixelArray[row].length; col++) {
         const hexColor = pixelArray[row][col];
-        const x = col * 10;
-        const y = row * 10;
+        const x = col * pixelSize;
+        const y = row * pixelSize;
 
         const boxShadowValue = `${x}px ${y}px ${hexColor}`;
         boxShadowValues.push(boxShadowValue);
@@ -107,12 +109,25 @@ function App() {
     return `#${(1 << 24 | (r << 16) | (g << 8) | b).toString(16).slice(1)}`;
   };
 
+  const handlePixelChange = (e: any) => {
+    const inputValue = e.target.value;
+    const numericValue = parseInt(inputValue, 10); 
+    setPixelSize(isNaN(numericValue) ? 0 : numericValue); 
+  };
   
 
   return (
     <>
       <div className="image-upload">
         <input type="file" accept="image/*" onChange={handleImageUpload} />
+        <label>
+          Enter Pixel Size (px): 
+        </label>
+        <input
+        type="text"
+        value={pixelSize}
+        onChange={handlePixelChange}
+      />
       </div>
       <div className="image-display">
         {image && <img src={image} alt="Uploaded" />}
