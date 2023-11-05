@@ -8,6 +8,7 @@ function App() {
   const [boxShadowString, setBoxShadowString] = useState<string>('');
 
   const [pixelSize, setPixelSize] = useState(10)
+  const [imageSize, setImageSize] = useState(16)
 
   //Function to handle image upload 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,21 +51,21 @@ function App() {
 
     image.onload = () => {
       const canvas = document.createElement('canvas');
-      canvas.width = 16;
-      canvas.height = 16;
+      canvas.width = imageSize; //16
+      canvas.height = imageSize; //16
       const context = canvas.getContext('2d');
 
       if (context) {
-        context.drawImage(image, 0, 0, 16, 16);
-        const imageData = context.getImageData(0, 0, 16, 16);
+        context.drawImage(image, 0, 0, imageSize, imageSize);
+        const imageData = context.getImageData(0, 0, imageSize, imageSize);
         const pixelData = imageData.data;
 
-        const pixelArray = new Array(16);
+        const pixelArray = new Array(imageSize);
 
-        for (let y = 0; y < 16; y++) {
-          pixelArray[y] = new Array(16);
-          for (let x = 0; x < 16; x++) {
-            const offset = (y * 16 + x) * 4; // 4 channels (R, G, B, A) per pixel
+        for (let y = 0; y < imageSize; y++) {
+          pixelArray[y] = new Array(imageSize);
+          for (let x = 0; x < imageSize; x++) {
+            const offset = (y * imageSize + x) * 4; // 4 channels (R, G, B, A) per pixel
             const hexColor = rgbToHex(
               pixelData[offset],
               pixelData[offset + 1],
@@ -114,6 +115,10 @@ function App() {
     const numericValue = parseInt(inputValue, 10); 
     setPixelSize(isNaN(numericValue) ? 0 : numericValue); 
   };
+
+  const handleImageSizeChange = (e: any) =>{
+    setImageSize(e.target.value)
+  }
   
 
   return (
@@ -121,12 +126,20 @@ function App() {
       <div className="image-upload">
         <input type="file" accept="image/*" onChange={handleImageUpload} />
         <label>
-          Enter Pixel Size (px): 
+          Pixel Size (px): 
         </label>
         <input
         type="text"
         value={pixelSize}
         onChange={handlePixelChange}
+      />
+      <label>
+          Image Size: 
+        </label>
+        <input
+        type="text"
+        value={imageSize}
+        onChange={handleImageSizeChange}
       />
       </div>
       <div className="image-display">
